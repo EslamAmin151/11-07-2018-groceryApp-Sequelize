@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Grocery List</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"></link>
+
+</head>
+<body>
+  <h1>{{name}}</h1>
+  <h4>Add Items</h4>
+  <form action='/individualItems' method='post' class="forminput">
+    <input type="hidden" name="store_id" value={{store_id}}>
+    <input type="hidden" name="name" value={{name}}>
+
+    <label for="groceryItem">Item: </label>
+    <input class="textinput" type="text" name="groceryItem" placeholder="e.g eggs, bread...">
+
+    <label for="quantity">Quantity: </label>
+    <input class="textinput" type="text" name="quantity" placeholder="e.g. 4...">
+
+    <label for="price">Price: </label>
+    <input class="textinput" type="text" name="price" placeholder="e.g. $7.00...">
+    <input class="submitBtn" type="submit" />
+  </form>
+
+      <h2>Grocery Items</h2>
+      <table class="itemsList">
+        <tr>
+          <th>Item Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+        {{#groceryList}}
+        {{id}}
+        <tr>
+        <td>{{item_name}}</td>
+        <td>{{quantity}}</td>
+        <td>{{price}}</td>
+        <td><form class="formDelete" action='/deleteItem' method='post'>
+          <input type="hidden" name="store" value={{store_id}}>
+          <input type="hidden" name="storeName" value={{name}}>
+          <input type="hidden" name="delete" value={{id}}>
+          <input type="submit" value="Delete">
+        </form></td>
+        <td><form action='/modify' method="post">
+          <input type="hidden" name="store" value={{store_id}}>
+          <input type="hidden" name="storeName" value={{name}}>
+          <input type="hidden" name="modifyQty" value={{id}}>
+          <input type="hidden" name='quantity' value={{quantity}}>
+          <input type="number" name="amtModify" placeholder="Amount to modify...">
+          <input type="submit" value="Modify">
+        </form></td>
+        <td><form action='/addToCart' method="post">
+          <input type="hidden" name="store" value={{store_id}}>
+          <input type="hidden" name="storeName" value={{name}}>
+          <input type="hidden" name="modifyQty" value={{id}}>
+          <input type="hidden" name='quantity' value={{quantity}}>
+          <input type="hidden" name='item_name' value={{item_name}}>
+          <input type="hidden" name='price' value={{price}}>
+          <input type="number" name="qtyToCart" placeholder="How many to cart">
+          <input type="submit" value="Add To Cart">
+        </form></td>
+        </tr>
+        {{/groceryList}}
+      </table>
+
+
+
+
+  </body>
+</html>

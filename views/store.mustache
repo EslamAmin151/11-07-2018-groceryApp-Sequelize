@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Cart</title>
+  </head>
+  <body>
+    <h4>{{storeName}}</h4>
+    <h5>{{storeLocation}}</h5>
+    <ul>
+    {{#items}}
+      <li>
+        <strong>{{name}}</strong>
+        <h5>Price: {{price}}</h5>
+        <p>Quantity: {{qty}}</p>
+      </li>
+    {{/items}}
+    </ul>
+
+  </body>
+</html>
